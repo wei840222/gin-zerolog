@@ -33,7 +33,7 @@ func Logger(logger zerolog.Logger, notLogged ...string) gin.HandlerFunc {
 		start := time.Now()
 		c.Next()
 		stop := time.Since(start)
-		latency := int(math.Ceil(float64(stop.Nanoseconds()) / 1000000.0))
+		duration := int(math.Ceil(float64(stop.Nanoseconds()) / 1000000.0))
 		statusCode := c.Writer.Status()
 		clientIP := c.ClientIP()
 		clientUserAgent := c.Request.UserAgent()
@@ -50,7 +50,7 @@ func Logger(logger zerolog.Logger, notLogged ...string) gin.HandlerFunc {
 		entry := map[string]interface{}{
 			"hostname":   hostname,
 			"statusCode": statusCode,
-			"latency":    latency, // time to process
+			"duration":   duration, // time to process
 			"clientIP":   clientIP,
 			"method":     c.Request.Method,
 			"path":       path,

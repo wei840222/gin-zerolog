@@ -1,4 +1,4 @@
-package ginlogrus
+package gin_zerolog
 
 import (
 	"math"
